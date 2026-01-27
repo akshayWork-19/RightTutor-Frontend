@@ -54,7 +54,8 @@ const ConsultationModal = ({ isOpen, onClose }: ConsultationModalProps) => {
     }
 
     try {
-      const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:8000/api/v1";
+      const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api/v1";
+      console.log(API_BASE_URL, name, phone, date);
       const response = await fetch(`${API_BASE_URL}/consultation`, {
         method: "POST",
         headers: {
@@ -69,7 +70,8 @@ const ConsultationModal = ({ isOpen, onClose }: ConsultationModalProps) => {
       });
 
       if (!response.ok) {
-        throw new Error("Failed to book consultation");
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.message || "Failed to book consultation");
       }
 
       setIsSubmitted(true);

@@ -40,7 +40,8 @@ const Contact = () => {
       });
 
       if (!response.ok) {
-        throw new Error("Failed to submit contact form");
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.message || "Failed to send message");
       }
 
       // toast.success("Message sent successfully! We'll get back to you soon.");
