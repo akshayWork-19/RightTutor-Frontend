@@ -10,6 +10,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import { useToast } from "@/hooks/use-toast";
+import { API_BASE_URL } from "@/config";
 
 interface ConsultationModalProps {
   isOpen: boolean;
@@ -54,7 +55,6 @@ const ConsultationModal = ({ isOpen, onClose }: ConsultationModalProps) => {
     }
 
     try {
-      const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api/v1";
       console.log(API_BASE_URL, name, phone, date);
       const response = await fetch(`${API_BASE_URL}/consultation`, {
         method: "POST",

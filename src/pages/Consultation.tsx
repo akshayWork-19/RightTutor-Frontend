@@ -12,6 +12,7 @@ import { Calendar, Clock, User, Phone, CheckCircle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
+import { API_BASE_URL } from "@/config";
 
 const timeSlots = [
   "9:00 AM", "10:00 AM", "11:00 AM", "12:00 PM",
@@ -53,7 +54,6 @@ const Consultation = () => {
     setIsSubmitted(true);
 
     try {
-      const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:8000/api/v1";
       const response = await fetch(`${API_BASE_URL}/consultation`, {
         method: "POST",
         headers: {

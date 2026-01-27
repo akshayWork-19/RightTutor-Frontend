@@ -8,6 +8,7 @@ import { motion } from "framer-motion";
 import ScrollAnimation from "@/components/ScrollAnimation";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
+import { API_BASE_URL } from "@/config";
 
 const Contact = () => {
   const { toast } = useToast();
@@ -30,7 +31,6 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
-      const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:8000/api/v1";
       const response = await fetch(`${API_BASE_URL}/contact`, {
         method: "POST",
         headers: {
