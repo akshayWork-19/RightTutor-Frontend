@@ -1,6 +1,6 @@
-# 💎 Elite Tutors Frontend
+# 💎 Right Tutor Frontend
 
-A premium, high-converting landing page and booking system for Elite Tutors, built with modern web technologies to deliver a cinematic user experience.
+A premium, high-converting landing page and booking system for Right Tutor, built with modern web technologies to deliver a cinematic user experience.
 
 ## ✨ Key Features
 
@@ -64,7 +64,7 @@ This project is optimized for **Vercel** deployment.
 ## 🎨 Design System
 
 We use a "Vibrant Premium" aesthetic:
-- **Primary Color**: `#FF850A` (Elite Amber)
+- **Primary Color**: `#FF850A` (Right Amber)
 - **Surface**: Dark/Glassmorphic (on dark sections)
 - **Typography**: Modern Sans-Serif (Inter / Outfit)
 - **Motion**: Consistent 0.3s - 0.5s spring physics for interactions.
