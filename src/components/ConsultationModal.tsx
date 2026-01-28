@@ -27,8 +27,8 @@ const ConsultationModal = ({ isOpen, onClose }: ConsultationModalProps) => {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [date, setDate] = useState<Date>();
-  const [time, setTime] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -53,6 +53,8 @@ const ConsultationModal = ({ isOpen, onClose }: ConsultationModalProps) => {
       });
       return;
     }
+
+    setIsSubmitting(true);
 
     try {
       console.log(API_BASE_URL, name, phone, date);
@@ -92,6 +94,8 @@ const ConsultationModal = ({ isOpen, onClose }: ConsultationModalProps) => {
         description: "Something went wrong. Please try again later.",
         variant: "destructive"
       });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -246,8 +250,14 @@ const ConsultationModal = ({ isOpen, onClose }: ConsultationModalProps) => {
                   </div>
 
                   {/* Submit */}
-                  <Button type="submit" variant="hero" size="lg" className="w-full mt-4">
-                    Confirm Booking
+                  <Button
+                    type="submit"
+                    variant="hero"
+                    size="lg"
+                    className="w-full mt-4"
+                    disabled={isSubmitting || isSubmitted}
+                  >
+                    {isSubmitting ? "Processing..." : isSubmitted ? "Booking Confirmed!" : "Confirm Booking"}
                   </Button>
 
                   <p className="text-xs text-muted-foreground text-center mt-3">
