@@ -63,8 +63,8 @@ const Navbar = () => {
   return (
     <motion.nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
-          ? "bg-background/95 backdrop-blur-md shadow-lg border-b border-border/10"
-          : "bg-background border-b border-border/20"
+        ? "bg-background/95 backdrop-blur-md shadow-lg border-b border-border/10"
+        : "bg-background border-b border-border/20"
         }`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
@@ -87,9 +87,10 @@ const Navbar = () => {
               <Link
                 key={link.name}
                 to={link.href}
+                aria-current={isActive(link.href) ? "page" : undefined}
                 className={`text-sm font-medium transition-colors duration-200 ${isActive(link.href)
-                    ? "text-primary"
-                    : "text-foreground/80 hover:text-primary"
+                  ? "text-primary"
+                  : "text-foreground/80 hover:text-primary"
                   }`}
               >
                 {link.name}
@@ -103,9 +104,10 @@ const Navbar = () => {
               <Link
                 key={link.name}
                 to={link.href}
+                aria-current={isActive(link.href) ? "page" : undefined}
                 className={`text-sm xl:text-[15px] font-medium transition-colors duration-200 ${isActive(link.href)
-                    ? "text-primary"
-                    : "text-foreground/80 hover:text-primary"
+                  ? "text-primary"
+                  : "text-foreground/80 hover:text-primary"
                   }`}
               >
                 {link.name}
@@ -214,8 +216,8 @@ const Navbar = () => {
                     <Link
                       to={link.href}
                       className={`block text-base sm:text-lg font-medium py-3 sm:py-4 px-3 sm:px-4 rounded-xl transition-all duration-200 ${isActive(link.href)
-                          ? "text-primary bg-primary/5"
-                          : "text-foreground hover:bg-muted/50"
+                        ? "text-primary bg-primary/5"
+                        : "text-foreground hover:bg-muted/50"
                         }`}
                       onClick={() => setIsOpen(false)}
                     >

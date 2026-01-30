@@ -118,6 +118,9 @@ const ConsultationModal = ({ isOpen, onClose }: ConsultationModalProps) => {
           exit={{ opacity: 0 }}
           className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-foreground/40 backdrop-blur-sm"
           onClick={resetAndClose}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="modal-title"
         >
           <motion.div
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
@@ -132,10 +135,11 @@ const ConsultationModal = ({ isOpen, onClose }: ConsultationModalProps) => {
               <button
                 onClick={resetAndClose}
                 className="absolute top-4 right-4 text-primary-foreground/80 hover:text-primary-foreground transition-colors"
+                aria-label="Close consultation modal"
               >
                 <X className="w-5 h-5" />
               </button>
-              <h2 className="text-lg font-heading font-bold text-primary-foreground">
+              <h2 id="modal-title" className="text-lg font-heading font-bold text-primary-foreground">
                 Book Free Consultation
               </h2>
               <p className="text-primary-foreground/80 text-sm mt-1">
