@@ -20,9 +20,24 @@ A premium, high-converting landing page and booking system for Right Tutor, buil
 - **Animations**: Framer Motion, GSAP (Subtle)
 - **Icons**: Lucide React
 - **State Management**: Context API (Local)
-- **API Communication**: Fetch API
+- **API Communication**: Fetch API & React Query
 
 ---
+
+## ⚡ Performance Engineering (New v1.1)
+
+We have optimized the build and runtime performance:
+- **Code Splitting**: Implemented **Route-based Lazy Loading**. The main bundle is now minimal; pages like `Consultation` or `Contact` load only on demand.
+- **Smart Chunking**: Configured `vite.config.ts` with `manualChunks` to split heavy dependencies (React, Framer Motion) into separate cacheable files.
+- **Visual Feedback**: Added `Suspense` with a `<PageLoader />` to ensure smooth transitions between lazy-loaded routes.
+
+## ♿ Accessibility & Inclusivity (New v1.1)
+
+A complete accessibility audit has been performed:
+- **Screen Reader Support**: All interactive elements (Modals, Menus) have proper `aria-labels`, `role="dialog"`, and `aria-model`.
+- **Navigation Cues**: Active headers now use `aria-current="page"` to better orient users.
+- **Semantic HTML**: Correct use of heading hierarchy and navigation landmarks.
+- **Alt Text**: All dynamic and static images include descriptive alt text.
 
 ## 📁 Directory Structure
 
