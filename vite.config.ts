@@ -15,4 +15,16 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    // Enable asset hashing for cache busting
+    assetsInlineLimit: 4096, // Don't inline assets larger than 4kb
+    rollupOptions: {
+      output: {
+        // Add content hash to asset filenames for proper caching
+        assetFileNames: 'assets/[name].[hash][extname]',
+        chunkFileNames: 'assets/[name].[hash].js',
+        entryFileNames: 'assets/[name].[hash].js',
+      },
+    },
+  },
 }));
