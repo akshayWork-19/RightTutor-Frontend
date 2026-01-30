@@ -18,8 +18,13 @@ export default defineConfig(({ mode }) => ({
   build: {
     // Enable asset hashing for cache busting
     assetsInlineLimit: 4096, // Don't inline assets larger than 4kb
+    chunkSizeWarningLimit: 1000, // Increase limit to silence warnings for reasonable chunks
     rollupOptions: {
       output: {
+        manualChunks: {
+          'vendor-react': ['react', 'react-dom', 'react-router-dom'],
+          'vendor-ui': ['framer-motion', 'lucide-react', 'clsx', 'tailwind-merge'],
+        },
         // Add content hash to asset filenames for proper caching
         assetFileNames: 'assets/[name].[hash][extname]',
         chunkFileNames: 'assets/[name].[hash].js',
