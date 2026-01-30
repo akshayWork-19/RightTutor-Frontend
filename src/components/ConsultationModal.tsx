@@ -27,6 +27,7 @@ const ConsultationModal = ({ isOpen, onClose }: ConsultationModalProps) => {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [date, setDate] = useState<Date>();
+  const [time, setTime] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
@@ -217,7 +218,11 @@ const ConsultationModal = ({ isOpen, onClose }: ConsultationModalProps) => {
                           mode="single"
                           selected={date}
                           onSelect={setDate}
-                          disabled={(date) => date < new Date() || date > new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)}
+                          disabled={(date) => {
+                            const today = new Date();
+                            today.setHours(0, 0, 0, 0);
+                            return date < today || date > new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
+                          }}
                           initialFocus
                           className="p-3 pointer-events-auto"
                         />
