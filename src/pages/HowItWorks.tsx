@@ -1,10 +1,14 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ExperienceSteps from "@/components/ExperienceSteps";
+import ConsultationModal from "@/components/ConsultationModal";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import { useState } from "react";
 
 const HowItWorks = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -17,10 +21,15 @@ const HowItWorks = () => {
                 How <span className="text-gradient">RightTutor</span> Works
               </h1>
               <p className="text-lg text-muted-foreground mb-8">
-                A simple, consultation-first approach to finding the perfect tutor for your child. 
+                A simple, consultation-first approach to finding the perfect tutor for your child.
                 No guesswork, no trial-and-error.
               </p>
-              <Button variant="hero" size="xl" className="group">
+              <Button
+                variant="hero"
+                size="xl"
+                className="group"
+                onClick={() => setIsModalOpen(true)}
+              >
                 Get Started Today
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Button>
@@ -82,6 +91,8 @@ const HowItWorks = () => {
         </section>
       </main>
       <Footer />
+
+      <ConsultationModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </div>
   );
 };

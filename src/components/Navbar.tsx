@@ -26,12 +26,28 @@ const Navbar = () => {
   // Prevent body scroll when menu is open
   useEffect(() => {
     if (isOpen) {
+      // Save current scroll position
+      const scrollY = window.scrollY;
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
       document.body.style.overflow = 'hidden';
     } else {
-      document.body.style.overflow = 'unset';
+      // Restore scroll position
+      const scrollY = document.body.style.top;
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      document.body.style.overflow = '';
+      if (scrollY) {
+        window.scrollTo(0, parseInt(scrollY || '0') * -1);
+      }
     }
     return () => {
-      document.body.style.overflow = 'unset';
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      document.body.style.overflow = '';
     };
   }, [isOpen]);
 
@@ -45,28 +61,24 @@ const Navbar = () => {
   const isActive = (href: string) => location.pathname === href;
 
   return (
-    <motion.nav 
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled 
-          ? "bg-background/95 backdrop-blur-md shadow-lg border-b border-border/10" 
+    <motion.nav
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
+          ? "bg-background/95 backdrop-blur-md shadow-lg border-b border-border/10"
           : "bg-background border-b border-border/20"
-      }`}
+        }`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.3 }}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className={`flex items-center justify-between transition-all duration-300 ${
-          isScrolled ? "h-14 sm:h-16 lg:h-16" : "h-16 sm:h-18 lg:h-[72px]"
-        }`}>
+        <div className={`flex items-center justify-between transition-all duration-300 ${isScrolled ? "h-14 sm:h-16 lg:h-16" : "h-16 sm:h-18 lg:h-[72px]"
+          }`}>
           {/* Logo */}
           <Link to="/" className="flex items-center z-50">
-            <span className={`font-logo font-bold text-foreground transition-all duration-300 ${
-              isScrolled ? "text-lg sm:text-xl lg:text-2xl" : "text-xl sm:text-2xl"
-            }`}>Right</span>
-            <span className={`font-logo font-bold text-primary transition-all duration-300 ${
-              isScrolled ? "text-lg sm:text-xl lg:text-2xl" : "text-xl sm:text-2xl"
-            }`}>Tutor</span>
+            <span className={`font-logo font-bold text-foreground transition-all duration-300 ${isScrolled ? "text-lg sm:text-xl lg:text-2xl" : "text-xl sm:text-2xl"
+              }`}>Right</span>
+            <span className={`font-logo font-bold text-primary transition-all duration-300 ${isScrolled ? "text-lg sm:text-xl lg:text-2xl" : "text-xl sm:text-2xl"
+              }`}>Tutor</span>
           </Link>
 
           {/* Tablet Navigation - Compact */}
@@ -75,11 +87,10 @@ const Navbar = () => {
               <Link
                 key={link.name}
                 to={link.href}
-                className={`text-sm font-medium transition-colors duration-200 ${
-                  isActive(link.href)
+                className={`text-sm font-medium transition-colors duration-200 ${isActive(link.href)
                     ? "text-primary"
                     : "text-foreground/80 hover:text-primary"
-                }`}
+                  }`}
               >
                 {link.name}
               </Link>
@@ -92,11 +103,10 @@ const Navbar = () => {
               <Link
                 key={link.name}
                 to={link.href}
-                className={`text-sm xl:text-[15px] font-medium transition-colors duration-200 ${
-                  isActive(link.href)
+                className={`text-sm xl:text-[15px] font-medium transition-colors duration-200 ${isActive(link.href)
                     ? "text-primary"
                     : "text-foreground/80 hover:text-primary"
-                }`}
+                  }`}
               >
                 {link.name}
               </Link>
@@ -106,12 +116,11 @@ const Navbar = () => {
           {/* Tablet CTA */}
           <div className="hidden md:flex lg:hidden items-center gap-2">
             <Link to="/consultation">
-              <Button 
-                variant="default" 
-                size="sm" 
-                className={`rounded-full font-medium transition-all duration-300 ${
-                  isScrolled ? "px-4 h-8 text-xs" : "px-5 h-9 text-sm"
-                }`}
+              <Button
+                variant="default"
+                size="sm"
+                className={`rounded-full font-medium transition-all duration-300 ${isScrolled ? "px-4 h-8 text-xs" : "px-5 h-9 text-sm"
+                  }`}
               >
                 Book Demo
               </Button>
@@ -121,23 +130,21 @@ const Navbar = () => {
           {/* Desktop CTA */}
           <div className="hidden lg:flex items-center gap-3">
             <Link to="/contact">
-              <Button 
-                variant="outline" 
-                size="sm" 
-                className={`rounded-full border-border hover:bg-muted/50 font-medium transition-all duration-300 ${
-                  isScrolled ? "px-5 h-9" : "px-6 h-10"
-                }`}
+              <Button
+                variant="outline"
+                size="sm"
+                className={`rounded-full border-border hover:bg-muted/50 font-medium transition-all duration-300 ${isScrolled ? "px-5 h-9" : "px-6 h-10"
+                  }`}
               >
                 Contact Us
               </Button>
             </Link>
             <Link to="/consultation">
-              <Button 
-                variant="default" 
-                size="sm" 
-                className={`rounded-full bg-primary hover:bg-primary/90 font-medium transition-all duration-300 ${
-                  isScrolled ? "px-5 h-9" : "px-6 h-10"
-                }`}
+              <Button
+                variant="default"
+                size="sm"
+                className={`rounded-full bg-primary hover:bg-primary/90 font-medium transition-all duration-300 ${isScrolled ? "px-5 h-9" : "px-6 h-10"
+                  }`}
               >
                 Book Free Demo
               </Button>
@@ -206,11 +213,10 @@ const Navbar = () => {
                   >
                     <Link
                       to={link.href}
-                      className={`block text-base sm:text-lg font-medium py-3 sm:py-4 px-3 sm:px-4 rounded-xl transition-all duration-200 ${
-                        isActive(link.href)
+                      className={`block text-base sm:text-lg font-medium py-3 sm:py-4 px-3 sm:px-4 rounded-xl transition-all duration-200 ${isActive(link.href)
                           ? "text-primary bg-primary/5"
                           : "text-foreground hover:bg-muted/50"
-                      }`}
+                        }`}
                       onClick={() => setIsOpen(false)}
                     >
                       {link.name}
@@ -235,18 +241,18 @@ const Navbar = () => {
                 className="flex flex-col gap-2 sm:gap-3"
               >
                 <Link to="/contact" onClick={() => setIsOpen(false)}>
-                  <Button 
-                    variant="outline" 
-                    size="lg" 
+                  <Button
+                    variant="outline"
+                    size="lg"
                     className="w-full rounded-full text-sm sm:text-base h-10 sm:h-12 border-border font-medium"
                   >
                     Contact Us
                   </Button>
                 </Link>
                 <Link to="/consultation" onClick={() => setIsOpen(false)}>
-                  <Button 
-                    variant="default" 
-                    size="lg" 
+                  <Button
+                    variant="default"
+                    size="lg"
                     className="w-full rounded-full text-sm sm:text-base h-10 sm:h-12 bg-primary hover:bg-primary/90 font-medium"
                   >
                     Book Free Demo

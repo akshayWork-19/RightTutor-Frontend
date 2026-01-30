@@ -80,8 +80,8 @@ const testimonials = [
 
 const Testimonials = () => {
   const [emblaRef, emblaApi] = useEmblaCarousel(
-    { 
-      loop: true, 
+    {
+      loop: true,
       align: "start",
       slidesToScroll: 1,
       dragFree: true,
@@ -90,7 +90,7 @@ const Testimonials = () => {
     },
     [Autoplay({ delay: 4000, stopOnInteraction: false, stopOnMouseEnter: true })]
   );
-  
+
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [canScrollPrev, setCanScrollPrev] = useState(false);
   const [canScrollNext, setCanScrollNext] = useState(true);
@@ -205,12 +205,12 @@ const Testimonials = () => {
                         <Star key={i} className="w-3.5 h-3.5 text-primary fill-primary" />
                       ))}
                     </div>
-                    
+
                     <Quote className="w-6 h-6 text-primary/20 mb-2 flex-shrink-0" />
                     <p className="text-foreground text-sm leading-relaxed flex-grow mb-4">
                       "{testimonial.text}"
                     </p>
-                    
+
                     <div className="flex items-center gap-3 pt-3 border-t border-border/50">
                       <img
                         src={testimonial.avatar}
@@ -238,11 +238,10 @@ const Testimonials = () => {
               <button
                 key={index}
                 onClick={() => emblaApi?.scrollTo(index)}
-                className={`w-2 h-2 rounded-full transition-all ${
-                  selectedIndex === index 
-                    ? "bg-primary w-6" 
+                className={`w-2 h-2 rounded-full transition-all ${selectedIndex === index
+                    ? "bg-primary w-6"
                     : "bg-primary/30"
-                }`}
+                  }`}
                 aria-label={`Go to testimonial ${index + 1}`}
               />
             ))}
@@ -253,7 +252,7 @@ const Testimonials = () => {
         <ScrollAnimation delay={0.3} className="mt-10 lg:mt-16">
           <div className="flex flex-col items-center gap-4">
             <div className="flex items-center -space-x-3">
-              {testimonials.slice(0, 6).map((testimonial, index) => (
+              {testimonials.slice(0, 5).map((testimonial, index) => (
                 <motion.img
                   key={testimonial.author}
                   src={testimonial.avatar}
@@ -264,12 +263,15 @@ const Testimonials = () => {
                   transition={{ delay: index * 0.1 }}
                   viewport={{ once: true }}
                   loading="lazy"
+                  onError={(e) => {
+                    e.currentTarget.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(testimonial.author)}&background=random`;
+                  }}
                 />
               ))}
               <motion.div
                 initial={{ opacity: 0, scale: 0 }}
                 whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.6 }}
+                transition={{ delay: 0.5 }}
                 viewport={{ once: true }}
                 className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-primary flex items-center justify-center text-primary-foreground text-xs font-bold border-2 border-background"
               >

@@ -51,7 +51,7 @@ const ChatBubbleAnimation = () => {
   const runAnimation = useCallback(() => {
     setVisibleMessages([]);
     setIsTyping(false);
-    
+
     const timers: NodeJS.Timeout[] = [];
     let delay = 500;
 
@@ -65,7 +65,7 @@ const ChatBubbleAnimation = () => {
         setIsTyping(false);
         setVisibleMessages(prev => [...prev, index]);
       }, delay));
-      
+
       delay += 1000;
     });
 
@@ -87,26 +87,26 @@ const ChatBubbleAnimation = () => {
   );
 
   return (
-    <div className="bg-card rounded-xl sm:rounded-2xl p-3 sm:p-4 shadow-elevated border border-border/50 h-[320px] sm:h-[400px] flex flex-col">
+    <div className="bg-card rounded-xl sm:rounded-2xl p-3 sm:p-4 md:p-5 shadow-elevated border border-border/50 h-[280px] sm:h-[350px] md:h-[400px] flex flex-col w-full max-w-full">
       {/* Header */}
-      <div className="flex items-center justify-between mb-3 pb-2.5 border-b border-border/40">
-        <div className="flex items-center gap-2 sm:gap-3">
-          <div className="relative">
+      <div className="flex items-center justify-between mb-2 sm:mb-3 pb-2 sm:pb-2.5 border-b border-border/40">
+        <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+          <div className="relative flex-shrink-0">
             <RightTutorAvatar size="lg" />
             <div className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 sm:w-3 sm:h-3 bg-green-500 rounded-full border-2 border-card" />
           </div>
-          <div>
-            <p className="font-semibold text-foreground text-xs sm:text-sm">RightTutor</p>
+          <div className="min-w-0">
+            <p className="font-semibold text-foreground text-xs sm:text-sm truncate">RightTutor</p>
             <p className="text-[10px] sm:text-xs text-green-600 flex items-center gap-1">
-              <span className="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-green-500" />
-              Online now
+              <span className="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-green-500 flex-shrink-0" />
+              <span className="truncate">Online now</span>
             </p>
           </div>
         </div>
       </div>
-      
+
       {/* Messages - Scrollable */}
-      <div 
+      <div
         ref={messagesContainerRef}
         className="flex-1 space-y-2.5 sm:space-y-3 overflow-y-auto scrollbar-hide pr-1"
         style={{ scrollBehavior: 'smooth' }}
@@ -122,16 +122,16 @@ const ChatBubbleAnimation = () => {
                 initial={{ opacity: 0, y: 20, scale: 0.9 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ 
-                  type: "spring", 
-                  stiffness: 300, 
+                transition={{
+                  type: "spring",
+                  stiffness: 300,
                   damping: 25,
                   mass: 0.8
                 }}
                 className={`flex items-end gap-1.5 sm:gap-2 ${isParent ? "flex-row-reverse" : ""}`}
               >
                 {isParent ? (
-                  <img 
+                  <img
                     src={PARENT_AVATAR}
                     alt="Parent"
                     className="w-6 h-6 sm:w-7 sm:h-7 rounded-full object-cover ring-1 ring-border flex-shrink-0"
@@ -143,11 +143,10 @@ const ChatBubbleAnimation = () => {
                   initial={{ opacity: 0, x: isParent ? 15 : -15 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.08, duration: 0.25 }}
-                  className={`px-3 py-2 sm:px-3.5 sm:py-2.5 rounded-xl sm:rounded-2xl text-[11px] sm:text-xs max-w-[78%] ${
-                    isParent
+                  className={`px-3 py-2 sm:px-3.5 sm:py-2.5 rounded-xl sm:rounded-2xl text-[11px] sm:text-xs max-w-[78%] ${isParent
                       ? "bg-primary text-primary-foreground rounded-br-sm"
                       : "bg-muted text-foreground rounded-bl-sm"
-                  }`}
+                    }`}
                 >
                   {msg.text}
                 </motion.div>
@@ -155,7 +154,7 @@ const ChatBubbleAnimation = () => {
             );
           })}
         </AnimatePresence>
-        
+
         {/* Typing indicator */}
         <AnimatePresence>
           {isTyping && (
