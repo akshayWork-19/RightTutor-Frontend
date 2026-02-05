@@ -148,7 +148,7 @@ const Navbar = () => {
                 className={`rounded-full bg-primary hover:bg-primary/90 font-medium transition-all duration-300 ${isScrolled ? "px-5 h-9" : "px-6 h-10"
                   }`}
               >
-                Book Free Demo
+                Book Free Call
               </Button>
             </Link>
           </div>
@@ -257,7 +257,7 @@ const Navbar = () => {
                     size="lg"
                     className="w-full rounded-full text-sm sm:text-base h-10 sm:h-12 bg-primary hover:bg-primary/90 font-medium"
                   >
-                    Book Free Demo
+                    Book Free Call
                   </Button>
                 </Link>
               </motion.div>

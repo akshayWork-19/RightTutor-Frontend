@@ -112,9 +112,9 @@ const ExperienceSteps = () => {
                           <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
                         </Button>
                         <Button
-                          variant="whatsapp"
+                          variant="heroOutline"
                           size="default"
-                          className="w-full sm:w-auto text-sm"
+                          className="w-full sm:w-auto text-sm bg-white text-black hover:text-primary hover:border-primary hover:bg-white shadow-sm"
                           onClick={() => window.open('https://wa.aisensy.com/+917975649383', '_blank')}
                         >
                           <MessageCircle className="w-4 h-4" />

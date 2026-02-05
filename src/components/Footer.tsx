@@ -13,7 +13,7 @@ const Footer = () => {
               <span className="text-xl sm:text-2xl font-logo font-bold text-primary">Tutor</span>
             </Link>
             <p className="text-background/70 max-w-md mb-4 sm:mb-6 text-xs sm:text-sm leading-relaxed">
-              India's most trusted platform for finding the right tutor for your child. 
+              India's most trusted platform for finding the right tutor for your child.
               Personalized learning, expert guidance, and lifetime support.
             </p>
           </div>
@@ -56,15 +56,15 @@ const Footer = () => {
             <ul className="space-y-2 sm:space-y-3">
               <li className="flex items-center gap-2 sm:gap-3">
                 <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-primary flex-shrink-0" />
-                <span className="text-background/70 text-xs sm:text-sm">+91 99999 99999</span>
+                <span className="text-background/70 text-xs sm:text-sm">+91 7975649383</span>
               </li>
               <li className="flex items-center gap-2 sm:gap-3">
                 <Mail className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-primary flex-shrink-0" />
-                <span className="text-background/70 text-xs sm:text-sm break-all">hello@righttutor.in</span>
+                <span className="text-background/70 text-xs sm:text-sm break-all">Connect@righttutor.com</span>
               </li>
               <li className="flex items-start gap-2 sm:gap-3">
                 <MapPin className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-primary flex-shrink-0 mt-0.5" />
-                <span className="text-background/70 text-xs sm:text-sm">Mumbai, India</span>
+                <span className="text-background/70 text-xs sm:text-sm">#36 ,Shreeyas Colony,JP nagar,7th phase ,bangalore , karnataka</span>
               </li>
             </ul>
           </div>

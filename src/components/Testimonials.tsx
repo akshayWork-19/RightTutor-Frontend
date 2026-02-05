@@ -78,6 +78,51 @@ const testimonials = [
   },
 ];
 
+import { memo } from "react";
+
+const TestimonialCard = memo(({ testimonial, index }: { testimonial: typeof testimonials[0], index: number }) => (
+  <motion.div
+    className="flex-shrink-0 w-[80%] sm:w-[45%] lg:w-[32%] select-none"
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ delay: 0.1, duration: 0.3 }} // Simplified delay to reduce stagger load
+    viewport={{ once: true, margin: "50px" }} // Added margin to trigger earlier
+  >
+    <div
+      className="bg-card rounded-xl sm:rounded-2xl p-4 sm:p-5 lg:p-6 shadow-card hover:shadow-elevated transition-all duration-300 h-full flex flex-col"
+    >
+      {/* Rating Stars */}
+      <div className="flex items-center gap-0.5 mb-3">
+        {[...Array(testimonial.rating)].map((_, i) => (
+          <Star key={i} className="w-3.5 h-3.5 text-primary fill-primary" />
+        ))}
+      </div>
+
+      <Quote className="w-6 h-6 text-primary/20 mb-2 flex-shrink-0" />
+      <p className="text-foreground text-sm leading-relaxed flex-grow mb-4">
+        "{testimonial.text}"
+      </p>
+
+      <div className="flex items-center gap-3 pt-3 border-t border-border/50">
+        <img
+          src={testimonial.avatar}
+          alt={testimonial.author}
+          className="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover ring-2 ring-primary/20"
+          loading="lazy"
+          onError={(e) => {
+            e.currentTarget.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(testimonial.author)}&background=random`;
+          }}
+        />
+        <div>
+          <p className="font-semibold text-foreground text-sm">{testimonial.author}</p>
+          <p className="text-xs text-muted-foreground">{testimonial.role}</p>
+        </div>
+      </div>
+    </div>
+  </motion.div>
+));
+TestimonialCard.displayName = "TestimonialCard";
+
 const Testimonials = () => {
   const [emblaRef, emblaApi] = useEmblaCarousel(
     {
@@ -186,48 +231,9 @@ const Testimonials = () => {
 
           {/* Carousel */}
           <div className="overflow-hidden cursor-grab active:cursor-grabbing touch-pan-x" ref={emblaRef}>
-            <div className="flex gap-3 sm:gap-4 lg:gap-6 ml-0 touch-pan-x" style={{ touchAction: 'pan-x' }}>
+            <div className="flex gap-3 sm:gap-4 lg:gap-6 ml-0 touch-pan-x will-change-transform" style={{ touchAction: 'pan-x' }}>
               {testimonials.map((testimonial, index) => (
-                <motion.div
-                  key={testimonial.author}
-                  className="flex-shrink-0 w-[80%] sm:w-[45%] lg:w-[32%] select-none"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.02, duration: 0.3 }}
-                  viewport={{ once: true }}
-                >
-                  <div
-                    className="bg-card rounded-xl sm:rounded-2xl p-4 sm:p-5 lg:p-6 shadow-card hover:shadow-elevated transition-all duration-300 h-full flex flex-col"
-                  >
-                    {/* Rating Stars */}
-                    <div className="flex items-center gap-0.5 mb-3">
-                      {[...Array(testimonial.rating)].map((_, i) => (
-                        <Star key={i} className="w-3.5 h-3.5 text-primary fill-primary" />
-                      ))}
-                    </div>
-
-                    <Quote className="w-6 h-6 text-primary/20 mb-2 flex-shrink-0" />
-                    <p className="text-foreground text-sm leading-relaxed flex-grow mb-4">
-                      "{testimonial.text}"
-                    </p>
-
-                    <div className="flex items-center gap-3 pt-3 border-t border-border/50">
-                      <img
-                        src={testimonial.avatar}
-                        alt={testimonial.author}
-                        className="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover ring-2 ring-primary/20"
-                        loading="lazy"
-                        onError={(e) => {
-                          e.currentTarget.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(testimonial.author)}&background=random`;
-                        }}
-                      />
-                      <div>
-                        <p className="font-semibold text-foreground text-sm">{testimonial.author}</p>
-                        <p className="text-xs text-muted-foreground">{testimonial.role}</p>
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
+                <TestimonialCard key={testimonial.author} testimonial={testimonial} index={index} />
               ))}
             </div>
           </div>
@@ -239,8 +245,8 @@ const Testimonials = () => {
                 key={index}
                 onClick={() => emblaApi?.scrollTo(index)}
                 className={`w-2 h-2 rounded-full transition-all ${selectedIndex === index
-                    ? "bg-primary w-6"
-                    : "bg-primary/30"
+                  ? "bg-primary w-6"
+                  : "bg-primary/30"
                   }`}
                 aria-label={`Go to testimonial ${index + 1}`}
               />
