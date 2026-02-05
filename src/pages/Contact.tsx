@@ -64,20 +64,20 @@ const Contact = () => {
     {
       icon: Phone,
       title: "Phone",
-      details: "+91 98765 43210",
+      details: "+91 7975649383",
       subtext: "Mon-Sat, 9am-7pm",
     },
     {
       icon: Mail,
       title: "Email",
-      details: "hello@righttutor.in",
+      details: "Connect@righttutor.com",
       subtext: "We reply within 24 hours",
     },
     {
       icon: MapPin,
       title: "Office",
-      details: "Mumbai, Maharashtra",
-      subtext: "India",
+      details: "Bangalore, India",
+      subtext: "Karnataka",
     },
     {
       icon: Clock,
@@ -187,7 +187,7 @@ const Contact = () => {
                       </label>
                       <Input
                         type="tel"
-                        placeholder="+91 98765 43210"
+                        placeholder="+91 7975649383"
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                         className="bg-background"
